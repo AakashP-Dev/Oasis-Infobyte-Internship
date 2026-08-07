@@ -22,7 +22,24 @@ class Aakash_2{
         switch (startGame.toLowerCase()) {
             case "yes":
             case "y":
-                result = GTN.playGame();
+                while(true){
+                    System.out.print("Which Difficulty would u like to play?\n1.Easy(1-50, 10 attempts)\n2.Medium(1-100, 7 attempts)\n3.Hard(1-200, 5 attemps)\nchoose(1, 2 or 3)>");
+                    int Difficulty = sc.nextInt();
+                    System.out.println("+=============================================+");
+                    if(Difficulty == 1){
+                        result = GTN.playGame(50, 10);
+                        break;
+                    }else if(Difficulty== 2){
+                        result = GTN.playGame(100, 7);
+                        break;
+                    }else if(Difficulty == 3){
+                        result = GTN.playGame(200, 5);
+                        break;
+                    }else{
+                        System.out.println("Invalid Input! Try Again.");
+                        System.out.println("+=============================================+");
+                    }
+                }
                 break;
             case "no":
             case "n":
@@ -50,7 +67,24 @@ class Aakash_2{
 
             if(playAgain.toLowerCase().equals("yes") || playAgain.toLowerCase().equals("y")) {
                 round++;
-                result = GTN.playGame();
+                while(true){
+                    System.out.print("Which Difficulty would u like to play?\n1.Easy(1-50, 10 attempts)\n2.Medium(1-100, 7 attempts)\n3.Hard(1-200, 5 attemps)\nchoose(1, 2 or 3)>");
+                    int Difficulty = sc.nextInt();
+                    System.out.println("+=============================================+");
+                    if(Difficulty == 1){
+                        result = GTN.playGame(50, 10);
+                        break;
+                    }else if(Difficulty== 2){
+                        result = GTN.playGame(100, 7);
+                        break;
+                    }else if(Difficulty == 3){
+                        result = GTN.playGame(200, 5);
+                        break;
+                    }else{
+                        System.out.println("Invalid Input! Try Again.");
+                        System.out.println("+=============================================+");
+                    }
+                }
             }
             else if(playAgain.toLowerCase().equals("no") || playAgain.toLowerCase().equals("n")) {
                 System.out.println("Your Played Total of " + round + " rounds");
@@ -77,8 +111,8 @@ class GuessTheNumber{
     Scanner sc = new Scanner(System.in);
     Random rand = new Random();
 
-    public int playGame(){
-        int randomNumber = rand.nextInt(100)+1;
+    public int playGame(int range, int attempts){
+        int randomNumber = rand.nextInt(range)+1;
         // System.out.println(randomNumber);
         int attemptCount = 1;
         int gameStatus = 0;
@@ -86,10 +120,10 @@ class GuessTheNumber{
 
         while(true){
             System.out.println("Attempt no: " + attemptCount);
-            System.out.print("Guess the Number(1-100): ");
+            System.out.print("Guess the Number(1-"+range+"): ");
             int guessedNumber = sc.nextInt();
 
-            if(attemptCount<=7){
+            if(attemptCount<attempts){
                 if(guessedNumber == randomNumber){
                     gameStatus = 1;
                     System.out.println("Correct!");
