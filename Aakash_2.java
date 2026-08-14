@@ -1,6 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
+@SuppressWarnings("unused")
 class Aakash_2{
     public static void main(String []args){
         Scanner sc = new Scanner(System.in);
@@ -20,36 +21,40 @@ class Aakash_2{
         System.out.println("+=============================================+");
 
         switch (startGame.toLowerCase()) {
-            case "yes":
-            case "y":
-                while(true){
-                    System.out.print("Which Difficulty would u like to play?\n1.Easy(1-50, 10 attempts)\n2.Medium(1-100, 7 attempts)\n3.Hard(1-200, 5 attemps)\nchoose(1, 2 or 3)>");
-                    int Difficulty = sc.nextInt();
-                    System.out.println("+=============================================+");
-                    if(Difficulty == 1){
+            case "yes", "y" -> {
+            OUTER_2:
+            while (true) {
+                System.out.print("Which Difficulty would u like to play?\n1.Easy(1-50, 10 attempts)\n2.Medium(1-100, 7 attempts)\n3.Hard(1-200, 5 attemps)\nchoose(1, 2 or 3)>");
+                int Difficulty = sc.nextInt();
+                System.out.println("+=============================================+");
+                switch (Difficulty) {
+                    case 1 -> {
                         result = GTN.playGame(50, 10);
-                        break;
-                    }else if(Difficulty== 2){
+                        break OUTER_2;
+                    }
+                    case 2 -> {
                         result = GTN.playGame(100, 7);
-                        break;
-                    }else if(Difficulty == 3){
+                        break OUTER_2;
+                    }
+                    case 3 -> {
                         result = GTN.playGame(200, 5);
-                        break;
-                    }else{
+                        break OUTER_2;
+                    }
+                    default -> {
                         System.out.println("Invalid Input! Try Again.");
                         System.out.println("+=============================================+");
                     }
                 }
-                break;
-            case "no":
-            case "n":
+            }
+            }
+            case "no", "n" -> {
                 System.out.println("Thank you!");
                 System.out.println("+=============================================+");
-                break;
-            default:
+            }
+            default -> {
                 System.out.println("Invalid Input! Try again.");
                 System.out.println("+=============================================+");
-                break;
+            }
         }
 
         if(result==1){
@@ -59,46 +64,53 @@ class Aakash_2{
             loses++;
         }
 
-        while(true){
+        OUTER_1:
+        while (true) {
             System.out.println("\n+=============================================+");
             System.out.print("Want to Play Again? Yes/No: ");
             String playAgain = sc.next();
             System.out.println("+=============================================+");
-
-            if(playAgain.toLowerCase().equals("yes") || playAgain.toLowerCase().equals("y")) {
-                round++;
-                while(true){
-                    System.out.print("Which Difficulty would u like to play?\n1.Easy(1-50, 10 attempts)\n2.Medium(1-100, 7 attempts)\n3.Hard(1-200, 5 attemps)\nchoose(1, 2 or 3)>");
-                    int Difficulty = sc.nextInt();
-                    System.out.println("+=============================================+");
-                    if(Difficulty == 1){
-                        result = GTN.playGame(50, 10);
-                        break;
-                    }else if(Difficulty== 2){
-                        result = GTN.playGame(100, 7);
-                        break;
-                    }else if(Difficulty == 3){
-                        result = GTN.playGame(200, 5);
-                        break;
-                    }else{
-                        System.out.println("Invalid Input! Try Again.");
+            switch (playAgain.toLowerCase()) {
+                case "yes", "y" -> {
+                    round++;
+                    OUTER:
+                    while (true) {
+                        System.out.print("Which Difficulty would u like to play?\n1.Easy(1-50, 10 attempts)\n2.Medium(1-100, 7 attempts)\n3.Hard(1-200, 5 attemps)\nchoose(1, 2 or 3)>");
+                        int Difficulty = sc.nextInt();
                         System.out.println("+=============================================+");
+                        switch (Difficulty) {
+                            case 1 -> {
+                                result = GTN.playGame(50, 10);
+                                break OUTER;
+                            }
+                            case 2 -> {
+                                result = GTN.playGame(100, 7);
+                                break OUTER;
+                            }
+                            case 3 -> {
+                                result = GTN.playGame(200, 5);
+                                break OUTER;
+                            }
+                            default -> {
+                                System.out.println("Invalid Input! Try Again.");
+                                System.out.println("+=============================================+");
+                            }
+                        }
                     }
                 }
+                case "no", "n" -> {
+                    System.out.println("Your Played Total of " + round + " rounds");
+                    System.out.println("Your Score is " + wins + " Wins and " + loses + " Loses.");
+                    System.out.println("Thank you for playing!");
+                    break OUTER_1;
+                }
+                default -> {
+                    System.out.println("Invalid Input! Try again.");
+                    System.out.println("+=============================================+");
+                }
             }
-            else if(playAgain.toLowerCase().equals("no") || playAgain.toLowerCase().equals("n")) {
-                System.out.println("Your Played Total of " + round + " rounds");
-                System.out.println("Your Score is " + wins + " Wins and " + loses + " Loses.");
-                System.out.println("Thank you for playing!");
-                break;
-            }
-            else{
-                System.out.println("Invalid Input! Try again.");
-                System.out.println("+=============================================+");
-            }
-
             if(result==1){
-            wins++;            
+                wins++;            
             }
             else if(result==-1){
                 loses++;
